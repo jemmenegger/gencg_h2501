@@ -38,6 +38,8 @@ From analog to digital, the mindset remained the same: define a system and let i
 - Played *Sprouts* — strategy emerging from visual constraints.  
 - Created a personal procedural drawing system inspired by Conditional Design.
 
+<iframe src="content\week01\embed.html" width="100%" height="700" frameborder="no"></iframe>
+
 **Digital (Computing with computer)**  
 1. Set up **p5.js** environment (VS Code + Live Server).  
 2. Reproduced a simple hand-drawing in code.  
@@ -54,3 +56,4 @@ function setup() {
     ellipse(random(width), random(height), random(20, 80));
   }
 }
+```
