@@ -12,14 +12,18 @@ As I noted, "I really had to get to know js, tweeked it a bit and tried out diff
 
 This process was a direct translation of the "rules and systems" from Week 1, but executed with code rather than by hand.
 
-*(My first experiment "tweeking" the grid variables and layout.)*
-<iframe src="content\week02\embed1.html" width="100%" height="700" frameborder="no"></iframe>
+*(My first experiment "tweeking" the grid variables and layout. Corresponds to sketch1.js)*
+<iframe src="content/week02/embed1.html" width="100%" height="700" frameborder="no"></iframe>
+
+After getting the basic grid working, I created a second variation to show the process of "tweeking" the parameters. I changed the `space` variable from 35 to 45 and properly implemented the `rotate()` function to see how it would alter the pattern.
+
+*(My second variation, manipulating the `space` and `rotate()` factors. Corresponds to sketch2.js)*
+<iframe src="content/week02/embed2.html" width="100%" height="700" frameborder="no"></iframe>
+
 
 ## Influences & References
 
 To "get to know js" better and bridge the gap from Week 1's analog concepts, I watched several YouTube tutorials to get into the topic.
-
-
 
 A key resource was the tutorial **"Making Simple Patterns in p5.js"** from the channel Steve's Makerspace. This video was a direct influence, as it explained the exact concepts I was experimenting with in my code:
 
@@ -45,23 +49,24 @@ This week was less about philosophy and more about practical implementation. The
 
 Here are the code snippets I worked on, showing the "tweeking" process.
 
-**First sketch (Simple grid of squares):**
+**First sketch (Simple grid of squares - `sketch1.js`)**
 ```js
 function setup() {
-  createCanvas(500,500);
-  fill(0);
-  strokeWeight(1);
-  rectMode(CENTER);
-  let space = 35;
-  let angle = 0;
-  for (let x=0;x<width+50;x+=space){
-    for (let y=0;y<height+50;y+=space){
-       //line(x,y,x+space,y);
-       //line(x,y,x,y+space);
-      push();      
-      square(x,y,10)
-      square(x+space/2,y+space/2,10)
-      rotate()
-    }
-  }
+  createCanvas(500,500);
+  fill(0);
+  strokeWeight(1);
+  rectMode(CENTER);
+  
+  let space = 35;
+  
+  for (let x=0; x < width+50; x+=space){
+    for (let y=0; y < height+50; y+=space){
+       //line(x,y,x+space,y);
+       //line(x,y,x,y+space);
+      
+      // No push() or rotate() needed for the simple version
+      square(x,y,10);
+      square(x+space/2,y+space/2,10);
+    }
+  }
 }
