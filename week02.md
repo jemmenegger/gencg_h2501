@@ -1,55 +1,41 @@
 # Week 2 – Grids, Loops & Transformation
 
-## Exploration & Experimentation
+## Exploration and Experimentation
+Moving on from the random layers of the first week, I shifted my focus to structured, grid-based patterns. This meant I had to get much more comfortable with JavaScript syntax, especially using nested for loops to place shapes across the canvas.
 
-Moving on from the random, layered compositions of the first week, my focus shifted to **structured, grid-based patterns**. This required getting much more familiar with JavaScript syntax, specifically nested `for` loops, to create a system that could place shapes across the canvas in a repeating pattern.
+I spent a lot of time tweaking the code to see what happened. I experimented by changing the `space` variable to adjust the density and hiding different lines to see the grid structure. I also placed squares both on the grid points and in the center of the cells to see how the layout changed.
 
-As I noted, "I really had to get to know js, tweeked it a bit and tried out different ones." This process of iteration was my main focus. I experimented with:
-* Changing the `space` variable (from 35 to 40) to see how it affected the density.
-* Commenting and uncommenting `line` elements to visualize the underlying grid structure.
-* Placing `square` shapes both on the grid points (`x, y`) and in the center of the grid cells (`x+space/2, y+space/2`).
-* Beginning to explore transformations by setting `rectMode(CENTER)` and experimenting with `rotate()`.
+This process was basically doing the "rules and systems" from Week 1, but executing them with code instead of by hand.
 
-This process was a direct translation of the "rules and systems" from Week 1, but executed with code rather than by hand.
-
-*(My first experiment "tweeking" the grid variables and layout. Corresponds to sketch1.js)*
 <iframe src="content/week02/embed1.html" width="100%" height="700" frameborder="no"></iframe>
 
-After getting the basic grid working, I created a second variation to show the process of "tweeking" the parameters. I changed the `space` variable from 35 to 45 and properly implemented the `rotate()` function to see how it would alter the pattern.
+After getting the basic grid working, I made a second version. I changed the spacing variable again and added rotation to see how it would alter the pattern.
 
-*(My second variation, manipulating the `space` and `rotate()` factors. Corresponds to sketch2.js)*
 <iframe src="content/week02/embed2.html" width="100%" height="700" frameborder="no"></iframe>
 
+## Influences and References
+To bridge the gap between analog concepts and code, I watched several YouTube tutorials. A key resource was "Making Simple Patterns in p5.js" by Steve's Makerspace.
 
-## Influences & References
+This video was a direct influence because it explained exactly what I was trying to do:
+* **Grid System:** It confirmed that patterns start with a grid system using nested loops for width and height.
+* **Parameters:** It showed how to use a variable to control spacing, which matched my experiments with the `space` variable.
+* **Placement:** The video discussed placing objects at intersections and centers, which I did using `x` and `x+space/2`.
+* **Transformations:** It introduced using `push()` to isolate changes like rotation.
 
-To "get to know js" better and bridge the gap from Week 1's analog concepts, I watched several YouTube tutorials to get into the topic.
-
-A key resource was the tutorial **"Making Simple Patterns in p5.js"** from the channel Steve's Makerspace. This video was a direct influence, as it explained the exact concepts I was experimenting with in my code:
-
-* **Grid System:** The video confirms that all patterns start with a grid system [00:00:39], which I built using nested `for` loops.
-* **Parameters:** It explains using a `space` variable to control the grid [00:01:15], which is exactly what I did when I "tweeked" my code from `space = 35` to `space = 40`.
-* **Placement:** The video discusses placing objects on the intersections *and* in the center of the grids [00:00:46]. This is directly reflected in my code with `square(x,y,...)` and `square(x+space/2, y+space/2,...)`.
-* **Transformations:** It showed how to use `push()` to isolate transformations like `rotate()` [00:09:20], which I experimented with in my second sketch by adding `rotate(180)`.
-
-> *"to make a grid like this we have two for loops one for the width and one for the height" – Steve's Makerspace [00:01:02]*
-
-This practical, code-focused guidance was essential for translating the abstract ideas of rules and systems into a working digital sketch.
+This practical advice helped me turn abstract ideas into a working digital sketch.
 
 ## Algorithmic Thinking
+This week was less about philosophy and more about practical implementation. The main takeaway was understanding how to build a systematic grid.
 
-This week was less about philosophy and more about practical implementation. The main takeaway was how to build a **systematic grid** and the importance of iterative development.
+**Digital**
+* **Nested Loops:** I learned to create a 2D grid by nesting a loop for the y-axis inside a loop for the x-axis.
+* **Placement:** I learned to place elements at offsets, like `x+space/2`, rather than just at the corners.
+* **Parameters:** I saw how a single variable can control the density of the entire composition.
+* **Transformations:** I started using `rectMode(CENTER)` and `rotate()` to change individual elements.
+* **Iteration:** Tweaking the code by changing values was my main method for learning these new concepts.
 
-**Digital (p5.js Practice)**
-1.  **Nested Loops:** My main learning was how to create a 2D grid by nesting a `for` loop for the y-axis inside a `for` loop for the x-axis.
-2.  **Grid-based Placement:** I learned to place elements not just *at* the grid intersections (`x,y`) but also at *offsets* relative to them, like `x+space/2`.
-3.  **Parameters:** I understood how a single variable like `let space` could act as a parameter to control the entire composition's density.
-4.  **Transformations:** I began to use `rectMode(CENTER)` to draw shapes from their center and `push()` / `rotate()` to apply transformations to individual elements within the grid.
-5.  **Iteration as Learning:** My process of "tweeking" the code (changing values, commenting/uncommenting lines) was my primary method of understanding these new concepts.
+Here is the code from my first grid experiment:
 
-Here are the code snippets I worked on, showing the "tweeking" process.
-
-**First sketch (Simple grid of squares - `sketch1.js`)**
 ```js
 function setup() {
   createCanvas(500,500);
@@ -70,3 +56,7 @@ function setup() {
     }
   }
 }
+```
+
+## Reflection
+My biggest step this week was moving from random experiments to a controlled structure. Learning to use nested loops allowed me to define a system that repeats perfectly. It was satisfying to see how "tweaking" just one rule or variable in the code could completely change the visual result.

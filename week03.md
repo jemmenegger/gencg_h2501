@@ -1,34 +1,24 @@
 # Week 3 – Deconstructing a 3D Time-Object
 
-## Exploration & Experimentation
+## Exploration and Experimentation
+The theme of time immediately gave me the idea of a physical, mechanical clock. I decided to move away from 2D and use `WEBGL` to create a 3D object that reacts to time.
 
-This week's theme of time as a parameter immediately brought a clear idea to my mind: a physical, mechanical clock. I wanted to move away from 2D and dive into `WEBGL` to create a 3D object that reacted to time.
+My concept was a "flipping cube" where different time units control different axes. Seconds make the cube spin 90 degrees around the Y-axis, while minutes make it flip on the X-axis. I knew the 3D math and text projection would be very difficult, so I used AI to generate the code based on my detailed description. My goal was to deconstruct the result and understand the logic behind the animation and rendering.
 
-My concept was a "flipping cube" clock, where different units of time would control different axes of rotation:
-* **Seconds:** For every second, the cube spins 90 degrees around its Y-axis (a "world spin").
-* **Minutes:** When the seconds roll over, the cube flips 90 degrees on its X-axis (a "nodding" motion).
-
-I had a clear vision for the *behavior* and *aesthetic* (glowing, holographic, smooth motion), but I knew the 3D math to make it work would be very difficult, especially attaching text to the moving faces.
-
-I used AI assistance to help generate the complex code based on my detailed idea. My goal was then to deconstruct this code, understand its core components, and learn from how it was pieced together. I focused on understanding the *logic* of the animation, the rendering, and the timing, even if the complex trigonometry for the text projection was still a "black box."
-
-*(My final 3D cube clock. Seconds spin the cube left/right, while minutes flip it forward.)*
 <iframe src="content/week03/embed1.html" width="100%" height="600" frameborder="no"></iframe>
 
-## Influences & References
+## Influences and References
+While I guided the final look, my inspiration came from a mix of mechanical and digital sources:
 
-While I guided the AI on the final aesthetic, my core inspiration came from several places:
-
-* **Split-Flap Displays:** The main idea is based on old-school mechanical "flip clocks" (or Solari boards) from train stations. I wanted to capture that feeling of a physical object "ticking" over to reveal new information. 
-* **Holographic UI Aesthetics:** The glowing `emissiveMaterial`, `blendMode(ADD)`, and the monospaced `SourceCodePro` font are all inspired by fictional sci-fi and holographic user interfaces.
-* **"Juicy" Animation Principles:** The use of `lerp()` to create the smooth, easing motion is a key principle in game development to make animations feel physical and satisfying, rather than instant and robotic.
+* **Split-Flap Displays:** I wanted the feeling of old-school mechanical "flip clocks" found in train stations, where the object physically ticks to reveal new info.
+* **Holographic UI:** The glowing materials and monospaced font were inspired by sci-fi holographic interfaces.
+* **"Juicy" Animation:** I used game development principles like `lerp()` to make the motion feel smooth and heavy instead of instant and robotic.
 
 ## Algorithmic Thinking
+My learning this week focused on reading the generated code and identifying the key building blocks. I was able to isolate the core logic that drives the clock.
 
-My learning this week was focused on reading the generated code and identifying the key "building blocks" of the system. I was able to isolate and understand these simple, powerful concepts:
-
-**1. The "Tick" Logic:**
-This is the brain of the clock. Instead of just running on `second()`, it checks *when the second changes*. I learned this is a much more robust way to trigger an event once.
+**The "Tick" Logic**
+Instead of just checking the current second, the code checks *when the second changes*. This is a robust way to trigger an animation exactly once per tick.
 
 ```js
 // Check if the second has just changed
@@ -43,3 +33,7 @@ if (s !== lastSecond) {
   
   lastSecond = s; // Remember the new second
 }
+```
+
+## Reflection
+This week was different because I worked backwards from a complex result. Even though the trigonometry for the text was complex, I learned a lot by analyzing the logic of the state changes. It showed me that I can build advanced 3D systems by defining the behavior clearly, even if I need help with the math.

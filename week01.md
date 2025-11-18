@@ -1,50 +1,35 @@
-# Week 1 – Introduction & Foundations
+# Week 1 – Introduction & First Experiments
 
-## Exploration & Experimentation
+## Exploration and Experimentation
+This week was my first real contact with generative art. We started completely analog to understand systems before touching any code.
 
-This first week introduced the foundations of **generative art** — from its philosophical roots to its hands-on analog beginnings.  
-We explored how rules, randomness, and interaction form the basis of creative systems, long before computers were involved.
+We played a drawing game called Sprouts. It sounds simple, but it acts like a small algorithm where you follow rules and react to what happens.
 
-During the analog session, I worked with another student on **Sprouts**, a rule-based drawing game by John H. Conway & Michael S. Patterson.  
-Even without code, we quickly noticed parallels to algorithmic thinking: constraints, iteration, and emergent complexity.  
-The unpredictability of each move reminded me how randomness and rules can generate surprising forms.
-
-Later, we moved to **p5.js**, where I set up the environment and recreated simple sketches.  
-I experimented with shapes, loops, and randomness — almost like translating the analog ideas into digital form.  
-My final result was an **abstract composition**, built by layering geometric shapes with randomised positions and colours.  
-This felt like painting with logic instead of a brush.
+After that, I moved to the online p5.js editor. I tried basic shapes and loops to recreate the feeling I got from the paper exercises. My final sketch is a small abstract composition made from random circles layered on top of each other.
 
 <img src="content/week01/IMG_8887.jpg" width="80%">
 
-*(Analog Sprouts game — lines and constraints forming visual systems.)*
+<iframe src="content/week01/embed.html" width="100%" height="400" frameborder="no"></iframe>
 
-## Influences & References
+## Influences and References
+I looked at important pioneers like Vera Molnar, Georg Nees, and Sol LeWitt. They helped me see how much you can express with simple forms and clear rules.
 
-We studied early pioneers such as **Hilma af Klint, Malevich, Kandinsky, Vera Molnár, Georg Nees**, and **Frieder Nake**,  
-each showing how mathematical or rule-driven structures can lead to strong aesthetics.
-
-> *“My life is a system of rules.”* – Vera Molnár  
-
-Her statement resonated with the week’s theme: creativity emerging from limitation.  
-Sol LeWitt’s *Wall Drawing #118* and the **Conditional Design Workbook** further highlighted how simple procedural rules  
-can lead to infinite variation — a concept I later explored through p5.js.
+Vera Molnar said, "My life is a system of rules". This quote really fits the idea of setting up a system and letting it run. Sol LeWitt was also influential because he gave precise instructions to let the drawing emerge from them.
 
 ## Algorithmic Thinking
+I learned that analog and digital systems follow the same logic.
 
-From analog to digital, the mindset remained the same: define a system and let it evolve.
+**Analog**
+* Sprouts showed me how rules shape the drawing.
+* Sol LeWitt’s instructions showed how a process can define the artwork.
+* The exercises helped me see drawing as a sequence of decisions.
 
-**Analog (Computing without computer)**  
-- Followed Sol LeWitt’s rule set for *Wall Drawing #118*: “Fifty randomly placed points all connected by straight lines.”  
-- Played *Sprouts* — strategy emerging from visual constraints.  
-- Created a personal procedural drawing system inspired by Conditional Design.
+**Digital**
+* A loop can replace repeating a step by hand.
+* Random numbers add natural variation.
+* Layering shapes creates complexity from simple rules.
 
-<iframe src="content\week01\embed.html" width="100%" height="400" frameborder="no"></iframe>
-
-**Digital (Computing with computer)**  
-1. Set up **p5.js** environment (VS Code + Live Server).  
-2. Reproduced a simple hand-drawing in code.  
-3. Explored randomness and iteration in grids.  
-4. Created an abstract digital painting from random shapes.
+Here is the code from my sketch:
 
 ```js
 function setup() {
@@ -57,3 +42,6 @@ function setup() {
   }
 }
 ```
+
+## Reflection
+The biggest thing I took away this week is how structure and randomness work together. Even simple code behaves like a system. It was cool to see that using code is just another way of following a set of rules, just like the analog games we played.

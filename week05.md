@@ -1,114 +1,45 @@
 # Week 5 – Parametric Faces
 
-## Exploration & Experimentation
+## Exploration and Experimentation
+This week I built a **face generator** that avoids direct drawing. Instead, every portrait emerges from a fixed set of shapes that get re-positioned, re-scaled, and re-layered. The goal was to generate strong variety while sticking to strict constraints.
 
-This week I built a **face generator** that avoids direct drawing. Instead, every portrait emerges from a **fixed set of shapes** that stay the same across outputs but get **re-positioned, re-scaled, and re-layered**. The goal: strong variety from strict constraints.
+**The Process**
+The core idea relies on a constant catalog of forms: face tiles, eyes, noses, and hair clusters.
+* **Placement:** A central face cluster emerges from tiles, with specific bands for eyes (top), nose (mid), and mouth (low).
+* **Rules:** I used collision boxes to ensure features do not overlap and always stay inside the face mask.
+* **Background:** The background uses the same color palette but is globally darkened so the face reads clearly in front.
 
-> Core idea: **~20 fixed shapes** (face tiles, two eyes, nose variants, mouth variants, hair clusters). Each output rearranges these elements — the viewer perceives a face even though only abstract building blocks are being shuffled.
-
----
-
-## Live Demo
-
-<iframe src="content/week05/embed1.html" width="100%" height="600" frameborder="no"></iframe>
-
----
-
-## Process & Iterations
-
-### 1) Defining the Toolkit  
-- A **constant catalog** of forms: 6–10 face tiles (rectangles and rounded blocks), **two eyes** (white sclera, colored iris rings, pupil), **nose variants** (incl. round “potato” nose), **mouth silhouettes** (full, thin, cupid-bow, downturned, etc.), **hair clusters** (arches and cloud forms), plus **ears**.  
-- A **shared palette** (6–8 colors) for face layers and a **globally darkened** version of the same palette for the background.
-
-### 2) Placement & Rules  
-- A **central face cluster** emerges from 3–4 tiles that visually fuse into one composite shape.  
-- **Feature bands**: eyes in the top band, nose mid, mouth lower band.  
-- **Collision boxes** prevent feature overlap; features must remain **inside the face mask**.  
-- **Hair** lives only in the upper face band with side margins so **ears stay clear**.  
-- **Always two eyes**, with occasional vertical or angled rotations for character.
-
-### 3) Background & Separation  
-- A **clustered tiled background** using neighbor-color reuse (bigger “patches” from small tiles), same palette but **uniformly darker** so the face reads clearly in front.  
-- No contour lines required — separation comes from **color staging**.
-
----
-
-## Results (Snapshots)
+<iframe src="content/week05/embed1.html" width="100%" height="900" frameborder="no"></iframe>
 
 <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center; align-items:flex-start; text-align:center;">
-  <figure style="margin:0;">
-    <img src="content/week05/image1.png" width="300" alt="Face Generator Output 1">
-    <figcaption style="font-size:0.9em;">a) dense face cluster with vertical eye rotation</figcaption>
-  </figure>
-  <figure style="margin:0;">
-    <img src="content/week05/image2.png" width="300" alt="Face Generator Output 2">
-    <figcaption style="font-size:0.9em;">b) potato nose, cupid-bow lips, cloud hair</figcaption>
-  </figure>
-  <figure style="margin:0;">
-    <img src="content/week05/image3.png" width="300" alt="Face Generator Output 3">
-    <figcaption style="font-size:0.9em;">c) minimal mouth, strong iris rings, rectangular tiles</figcaption>
-  </figure>
+  <img src="content/week05/image1.png" width="30%">
+  <img src="content/week05/image2.png" width="30%">
+  <img src="content/week05/image3.png" width="30%">
 </div>
 
----
+## Influences and References
+My aim was to blend Cubist composition with a vibrant pop-art palette.
 
-## System Logic (concise)
-
-**Shape vocabulary (fixed):**  
-- ~6–10 face tiles, **2 eyes**, 1 nose (picked from 4 styles), 1 mouth (picked from 6 styles), 1–3 hair clusters, 2 ears.  
-- **No new shapes** — only **position, scale, rotation, and layer** change.
-
-**Placement:**  
-- A face **mask** defines valid positions.  
-- `getFeaturePos()` samples random points **inside** the mask and uses AABB boxes to avoid overlaps.
-
-**Background:**  
-- Coarse grid → subdivided tiles with **neighbor color reuse** to create clustered patches; **globally darker** than the face palette.
-
-**Re-roll:**  
-- A fresh arrangement is generated **every 4 seconds** (same shapes, new composition).
-
----
-
-## Influences & References
-
-My aim was to blend **Cubist composition** (fragmented planes, simultaneity of views) with a **vibrant pop-art palette** for crisp, graphic impact.
+* **Diego Rivera (Cubism):** His collage logic and fragmented planes informed how I stacked the face layers.
+* **Orphism (Windows theme):** The overlapping "window" planes inspired the clustered background and color blocks.
+* **Pop-art:** I used a saturated, punchy palette to keep the compositions bold.
 
 <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap; text-align:center;">
-  <figure style="margin:0;">
-    <img src="content/week05/ref1.jpg" width="45%" alt="Diego Rivera, 1914, Portrait de Messieurs Kawashima et Foujita">
-    <figcaption style="font-size:0.9em;">
-      Diego Rivera, <em>Portrait de Messieurs Kawashima et Foujita</em>, 1914 — oil & collage, private collection.
-    </figcaption>
-  </figure>
-  <figure style="margin:0;">
-    <img src="content/week05/ref2.jpg" width="45%" alt="Les Fenêtres simultanées sur la ville, 1912">
-    <figcaption style="font-size:0.9em;">
-      <em>Fensterbild (Les Fenêtres simultanées sur la ville)</em>, 1912 — dynamic windows/city simultaneity.
-    </figcaption>
-  </figure>
+  <img src="content/week05/ref1.jpg" width="45%">
+  <img src="content/week05/ref2.jpg" width="45%">
 </div>
 
-- **Cubism (Rivera, 1914)** — collage logic and planar fragmentation inform the face tiles and stacked layers.  
-- **Orphism/Simultanism (Windows theme, 1912)** — overlapping “window” planes and rhythm of fields inspired the clustered background and color blocks.  
-- **Pop-art vibrancy** — saturated, punchy palette to keep the compositions bold and contemporary.
+## Algorithmic Thinking
+The system follows a strict logic to ensure the abstract shapes look like a face.
 
----
+**1. Fixed Vocabulary**
+No new shapes are ever created. The code only changes the position, scale, rotation, and layering of the fixed set.
 
-## Technical Notes
+**2. Mask-Based Placement**
+The function `getFeaturePos()` samples random points inside a mask and uses bounding boxes (AABB) to prevent any overlap between features.
 
-- p5.js in the online editor; no external dependencies.  
-- **Mask-based placement** ensures features stay inside the composite face shape.  
-- **AABB collision** avoids feature overlap.  
-- **Hair side margins** protect ear regions; ears render last to stay clean.
+**3. Re-roll Logic**
+A fresh arrangement is generated every 4 seconds, creating a new composition from the exact same building blocks.
 
----
-
-## Reflection & Next
-
-This generator shows how **repetition + re-arrangement** can yield wide variation. Because the shapes are fixed, the composition and color decisions become the expressive arena — the viewer completes the face.
-
-Next steps:  
-- **Preset seeds** for reproducible characters,  
-- **Batch export** (sprite sheets),  
-- a **“mood axis”** that co-modulates multiple traits (mouth curvature, eye rotation, hair density).
+## Reflection
+This project showed me how **repetition and rearrangement** can yield huge variation. Since the shapes are fixed, the composition becomes the main tool for expression. It creates an interesting effect where the viewer's brain completes the face from abstract blocks.
