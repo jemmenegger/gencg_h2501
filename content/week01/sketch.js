@@ -25,12 +25,3 @@ function draw() {
   fill(c);
   triangle(300, 750, 580, 200, 86, 75);
 }
-
-// This ensures the canvas resizes if the window changes
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
-  
-  // Optional: You might want to redraw the background here 
-  // because resizing clears the canvas
-  background(200, 200, 20); 
-}
