@@ -13,7 +13,7 @@ I had a clear vision for the *behavior* and *aesthetic* (glowing, holographic, s
 I used AI assistance to help generate the complex code based on my detailed idea. My goal was then to deconstruct this code, understand its core components, and learn from how it was pieced together. I focused on understanding the *logic* of the animation, the rendering, and the timing, even if the complex trigonometry for the text projection was still a "black box."
 
 *(My final 3D cube clock. Seconds spin the cube left/right, while minutes flip it forward.)*
-<iframe src="content/week03/embed3.html" width="100%" height="600" frameborder="no"></iframe>
+<iframe src="content/week03/embed1.html" width="100%" height="600" frameborder="no"></iframe>
 
 ## Influences & References
 
