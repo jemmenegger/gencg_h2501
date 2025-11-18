@@ -89,11 +89,13 @@ After this, the system felt alive — constantly changing, but never chaotic. It
 
 This project draws from algorithmic art pioneers who treated systems as creative collaborators rather than tools.
 
-<div align="center">
-  <img src="Image1.webp" width="45%" style="margin-right:10px;">
-  <img src="Image2.webp" width="45%">
-  <p><em>Vera Molnár, <strong>Interruptions</strong>, 1969. Black-and-white plotter drawing. Victoria & Albert Museum.</em></p>
+<div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap; text-align:center;">
+  <img src="content/week04/Image1.webp" width="45%">
+  <img src="content/week04/Image2.webp" width="45%">
 </div>
+<p style="text-align:center;">
+  <em>Vera Molnár, <strong>Interruptions</strong>, 1969. Black-and-white plotter drawing. Victoria &amp; Albert Museum.</em>
+</p>
 
 - **Vera Molnár** – Her work *Interruptions (1969)* was a key visual reference. Molnár explored *constructive disorder* within strict geometric systems, where the machine’s precision was intentionally disturbed to produce subtle irregularities. This conceptual tension between control and error became a direct influence on how my drawing machine operates.  
 - **Georg Nees** – For his early rule-based drawings and explorations of order versus deviation.  
