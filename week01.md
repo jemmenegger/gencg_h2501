@@ -9,7 +9,7 @@ After that, I moved to the online p5.js editor. I tried basic shapes and loops t
 
 <img src="content/week01/IMG_8887.jpg" width="80%">
 
-<iframe src="content/week01/embed.html" width="100%" height="400" frameborder="no"></iframe>
+<iframe src="content/week01/embed.html" width="100%" height="600" frameborder="no"></iframe>
 
 ## Influences and References
 I looked at important pioneers like Vera Molnar, Georg Nees, and Sol LeWitt. They helped me see how much you can express with simple forms and clear rules.
