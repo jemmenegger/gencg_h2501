@@ -30,8 +30,8 @@ My main inspiration came from artists who treat systems as collaborators.
 * **Anders Hoff (Inconvergent):** He showed me how controlled noise can produce elegance rather than chaos.
 
 <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap; text-align:center;">
-  <img src="content/week04/Image1.png" width="45%">
-  <img src="content/week04/Image2.png" width="45%">
+  <img src="content/week04/image1.png" width="45%">
+  <img src="content/week04/image2.png" width="45%">
 </div>
 
 ## Algorithmic Thinking
