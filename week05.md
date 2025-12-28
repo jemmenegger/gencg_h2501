@@ -1,3 +1,8 @@
+---
+title: Week 5 – Parametric Faces
+nav_order: 60
+nav_exclude: true
+---
 # Week 5 – Parametric Faces
 
 ## Exploration and Experimentation

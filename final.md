@@ -1,7 +1,12 @@
+---
+title: Final Project – Breathing Cube
+nav_order: 70
+nav_exclude: true
+---
 # Final Project Documentation: Breathing Cube
 
 ## Interactive sketch
-<iframe src="content/final/embed1.html" width="100%" height="650" frameborder="no"></iframe>
+<iframe src="content/final/embed1.html" width="100%" height="700" frameborder="no"></iframe>
 
 <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap; text-align:center; margin-top:10px;">
   <img src="content/final/breathing-cube_01.webp" width="45%" alt="Breathing Cube screenshot 1">

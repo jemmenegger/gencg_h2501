@@ -1,3 +1,8 @@
+---
+title: Week 2 – Grids, Loops & Transformation
+nav_order: 30
+nav_exclude: true
+---
 # Week 2 – Grids, Loops & Transformation
 
 ## Exploration and Experimentation
