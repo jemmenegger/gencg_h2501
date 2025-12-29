@@ -1,6 +1,6 @@
 ---
 title: Final Project – Breathing Cube
-nav_order: 70
+nav_order: 80
 ---
 # Final Project Documentation: Breathing Cube
 
