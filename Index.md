@@ -24,3 +24,4 @@ Across the weeks, I explored different ways to think algorithmically. Early exer
 - [Week 3: Deconstructing a 3D Time-Object](week03)  
 - [Week 4: Drawing Machines](week04)  
 - [Week 5: Parametric Faces](week05)  
+- [Week 7: Pixel Rain Waves](week07)
