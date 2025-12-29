@@ -1,7 +1,6 @@
 ---
 title: Day 01
 nav_order: 10
-nav_exclude: true
 ---
 # Week 1 – Introduction & First Experiments
 

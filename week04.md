@@ -1,7 +1,6 @@
 ---
 title: Week 4 – Drawing Machines
 nav_order: 50
-nav_exclude: true
 ---
 # Week 4 – Drawing Machines
 

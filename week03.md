@@ -1,7 +1,6 @@
 ---
 title: Week 3 – Deconstructing a 3D Time-Object
 nav_order: 40
-nav_exclude: true
 ---
 # Week 3 – Deconstructing a 3D Time-Object
 
