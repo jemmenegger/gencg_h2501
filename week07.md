@@ -1,20 +1,21 @@
 ---
 title: Week 7 – Pixel Rain Waves
 nav_order: 70
----# Week 07 – Pixel Rain Waves
+---
+
+# Week 07 – Pixel Rain Waves
 
 ## Exploration & Experimentation
 
 Goal: a **bird’s-eye view of water** where **raindrops** trigger **concentric ripples** that overlap, cancel, and recombine. Instead of cellular life rules, I used a **discrete wave field** with damping, rendered as **pixel art**.
 
-Why the **red–white–black** palette?
-- **White** for highlights and crest lines.
-- **Red** for the water body — strong readability at low resolution.
-- **Black** for steep slopes and trough accents.  
-Constrained color forces composition and rhythm over effects and gradients.
+**Why red–white–black?**
+- **White** for highlights and crest lines
+- **Red** for the water body (clear at low resolution)
+- **Black** for steep slopes/trough accents  
+The limited palette forces composition and rhythm over gradients.
 
-**Interactions:**  
-`SPACE` play/pause · `A` auto-rain · `R` reroll (new seed) · `C` clear · click = splash
+**Interactions:** `SPACE` play/pause · `A` auto-rain · `R` reroll (new seed) · `C` clear · click = splash
 
 ---
 
@@ -27,13 +28,13 @@ Constrained color forces composition and rhythm over effects and gradients.
 ## Iterations
 
 ### 1) Wave Core
-A height field with two buffers (`cur`, `prev`) updated by a **4-neighbor Laplacian** + **damping**. The first pass animated correctly but looked flat; the ripples needed visual cues.
+Two height buffers (`cur`, `prev`) updated by a **4-neighbor Laplacian** with **damping**. Animation worked, but ripples looked flat.
 
 ### 2) Light & Contrast
-Per-pixel **normals** approximated from local differences plus a simple **Lambert highlight**. Threshold mapping: **white** for highlights, **red** for body, **black** for steep slopes. Readability jumped without leaving the pixel look.
+Per-pixel **normals** from local differences + simple Lambert term. Threshold mapping: **white** = highlight, **red** = body, **black** = steep slopes. Readability improved without losing the pixel look.
 
 ### 3) Rain & Variation
-Each drop is a **Gaussian impulse** for clean initial rings. **Auto-rain** adds stochastic small drops; **reroll** spawns broad seed waves. Same rules, but every session looks different.
+Drops are **Gaussian impulses** (clean initial rings). **Auto-rain** adds stochastic micro-impacts; **reroll** seeds broad wave fronts. Same rules, different look each run.
 
 ---
 
@@ -84,15 +85,13 @@ color = slope>t1 ? black : (h>t2 ? white : red);
 
 ## Influences & References
 
-- **Height-field wave solvers** as a simple, robust real-time model.  
-- **Minimal palettes** in pixel art — structure over shader complexity.  
-- Prior work with **reaction–diffusion / wave-like systems** as conceptual grounding.
+- **Height-field wave solvers** as a simple, robust real-time model  
+- **Minimal palettes** in pixel art (structure over shader complexity)  
+- Prior **reaction–diffusion / wave-like** studies for conceptual grounding
 
 ---
 
 ## Critical Reflection
 
-Reducing to **three colors** and a **simple wave model** forced clarity: composition, timing, density. With **reroll** and **auto-rain**, the system stays fresh without added complexity.  
-Key learning: even at low resolution, **normal estimation + threshold mapping** brings strong legibility and style.
-
-**Next:** optional 8-neighbor Laplacian (wider fronts), position-dependent damping (viscosity), and small preset controls for seeds and lighting.
+Constraining color and physics simplified decisions: **composition, timing, density**. With **reroll** and **auto-rain**, the system stays fresh without added complexity.  
+Key learning: even at low resolution, **normal estimation + threshold mapping** yields strong legibility and a distinct style.
