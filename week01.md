@@ -1,5 +1,5 @@
 ---
-title: Day 01
+title: Week 1 – Introduction & First Experiments
 nav_order: 10
 ---
 # Week 1 – Introduction & First Experiments
