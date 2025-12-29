@@ -1,7 +1,3 @@
----
-title: Day 01
-nav_exclude: true
----
 # Day 01
 
 ## Computing without computer
