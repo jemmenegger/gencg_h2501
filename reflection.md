@@ -26,17 +26,5 @@ LLMs helped me ship faster. They gave me working scaffolds, quick refactors, and
 - **Small black ear speck (Week 5):** draw order problem. Fix: add small “ear corridors” and adjust layer order.
 - **Flat ripples (Week 7):** hard to read. Fix: normal based shading and a strict 3 color palette.
 
-## Skills I improved
-- State design with double buffers and offscreen masks
-- Small schedulers for overlapping parameter changes
-- Grid math, local vs global transforms, safe sampling
-- Threshold mapping, pixel palettes, simple normal shading
-- Cleaner p5.js structure and reproducible seeds
-
-## What I want to try next
-- **Drawing Machine:** presets, export timelines, and a small display that shows which two params are active.
-- **Face Generator:** batch export, a simple “mood” axis that links mouth curve, eye angle, and hair mass, plus seed presets.
-- **Pixel Waves:** optional 8 neighbor Laplacian, position based damping (viscosity), small palette presets while keeping the pixel look.
-
 ## Final thoughts
 This semester I moved from making effects to composing behaviours. LLMs helped me work faster, but the work only made sense when I could explain the rule behind it. The best results often started as bugs that showed me a better rule. That is what I want to keep doing.
