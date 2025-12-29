@@ -3,6 +3,7 @@ title: Home
 nav_order: 1
 ---
 
+
 # GENCG H2501
 
 - [Final Project](final)
