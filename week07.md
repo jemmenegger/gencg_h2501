@@ -1,4 +1,7 @@
-# Week 07 – Pixel Rain Waves
+---
+title: Week 7 – Pixel Rain Waves
+nav_order: 70
+---# Week 07 – Pixel Rain Waves
 
 ## Exploration & Experimentation
 
