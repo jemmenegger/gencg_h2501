@@ -121,55 +121,188 @@ I also added a camera system:
 
 ## Algorithmic thinking (how it works)
 
-### 1) Stable structure: a centred lattice
-The lattice is centred inside the canvas using a margin and a fixed usable area. From that I calculate the cell size and place cubes evenly in a 3D grid.
+### Code structure (quick map)
+The sketch is basically split into three parts:
+1. **Simulation**: update the evolving parameters (size, irr, stroke weight)
+2. **Camera**: auto orbit + manual control + smooth snap back
+3. **Drawing**: build the cube lattice and draw jittered wireframe cubes
 
-This keeps the composition stable and readable. The structure is the anchor for everything else.
+---
+
+### 1) Stable structure: a centred lattice
+I first define a margin and a usable area. This makes the lattice feel framed, instead of touching the canvas edges.
+
+```js
+const margin = min(width, height) * MARGIN;
+const usable = min(width, height) - 2 * margin;
+
+const cell = usable / N;
+const start = -((N - 1) * cell) / 2;
+```
+
+Then I place cubes in a 3D grid. Each cube has a fixed position based on its x, y, z index:
+
+```js
+for (let x = 0; x < N; x++)
+  for (let y = 0; y < N; y++)
+    for (let z = 0; z < N; z++) {
+      push();
+      translate(start + x * cell, start + y * cell, start + z * cell);
+      // draw cube here...
+      pop();
+    }
+```
+
+This part is the strict rule of the piece. No matter how the parameters change, the lattice stays stable.
+
+---
 
 ### 2) Drawing one cube: jittered vertices plus wireframe edges
-A cube starts as 8 clean corner points. Then I jitter each corner based on the irregularity value. After that I draw the 12 edges as line segments.
+A cube starts as 8 clean vertices (normal cube corners). Then I add jitter to each vertex. The jitter amount is based on the `irr` parameter.
 
-So it stays clearly a cube, but it looks imperfect and drawn.
+```js
+const h = s / 2;       // half size
+const j = s * irr;     // jitter range
+
+const v = [
+  [-h,-h,-h],[ h,-h,-h],[ h, h,-h],[-h, h,-h],
+  [-h,-h, h],[ h,-h, h],[ h, h, h],[-h, h, h],
+].map(([x,y,z]) => [
+  x + random(-j, j),
+  y + random(-j, j),
+  z + random(-j, j)
+]);
+```
+
+Then I draw the cube as lines. I use a simple edge list (12 edges):
+
+```js
+const e = [
+  [0,1],[1,2],[2,3],[3,0],
+  [4,5],[5,6],[6,7],[7,4],
+  [0,4],[1,5],[2,6],[3,7]
+];
+
+beginShape(LINES);
+for (const [a,b] of e) {
+  vertex(v[a][0], v[a][1], v[a][2]);
+  vertex(v[b][0], v[b][1], v[b][2]);
+}
+endShape();
+```
+
+So the cube stays readable, but it looks slightly drawn and imperfect.
+
+---
 
 ### 3) Stable randomness (no flicker)
-I did not want the jitter to change every frame. That would look like random flicker.
+At first I had flickering, because random jitter would change every frame. I did not want that. I wanted each cube to keep its own stable shape.
 
-To prevent this, I control randomness with a seed:
-- The sketch has one global seed
-- Each cube gets a deterministic per cell seed based on its x, y, z index
+So I control the randomness using `randomSeed()`.
 
-This makes each cube’s jitter stable over time. The form does not re roll every frame.
+Global seed (same every frame):
+```js
+randomSeed(UI.seed);
+```
+
+Then I create a deterministic seed per cube cell:
+```js
+randomSeed(UI.seed + x * 10000 + y * 100 + z);
+```
+
+This makes the jitter stable per cube. The cube does not re roll every frame. Only the evolving parameters change the overall look.
+
+---
 
 ### 4) Autonomous evolution (the breathing motion)
-The breathing effect comes from a motion system that evolves parameters over time.
+The breathing effect is made by evolving only a few parameters over time:
+- `size`
+- `irr`
+- `w` (stroke weight)
 
-Rules:
-- Two parameters evolve at the same time
-- When a motion ends, a new one starts, so the system never stops
-- A new motion is introduced every 1800 ms
-- Each motion lasts 3500 ms
-- Values bounce between 0 and 100 instead of resetting
+I treat each evolving parameter as a motion object:
 
-Because motions overlap, the change feels smooth and alive.
+```js
+return { k, dir, spd, end: now + DUR_MS };
+```
 
-### 5) Freeze mode for inspection
-Pressing Space toggles freeze:
-- Simulation time stops
-- Parameters stop evolving
-- Auto orbit stops
+In the draw loop I always keep two motions alive:
 
-But you can still rotate and zoom to inspect the frozen state. This turns the sketch into something you can study like a still object.
+```js
+motions = motions.filter(m => now < m.end);
+while (motions.length < 2) motions.push(makeMotion(now));
+```
 
-### 6) Camera behaviour
-The camera slowly orbits the centre when you do nothing. If you drag, you take control. When you release, it eases back into the auto orbit. This keeps the sketch autonomous, but still allows exploration.
+The motions change the UI values smoothly, and bounce at the limits:
+
+```js
+UI[m.k] += m.dir * m.spd * frameScale;
+
+if (UI[m.k] >= 100) { UI[m.k] = 100; m.dir = -1; }
+if (UI[m.k] <= 0)   { UI[m.k] =   0; m.dir =  1; }
+```
+
+Timing is important here:
+- each motion runs about 3.5 seconds (`DUR_MS`)
+- a new motion starts every 1.8 seconds (`NEW_MS`)
+So they overlap, which creates a rhythm.
+
+---
+
+### 5) Frame rate safe movement
+If FPS drops, I still want motion speed to feel similar. So I scale the change by frame time:
+
+```js
+const frameScale = dtSim / (1000 / FPS);
+UI[m.k] += m.dir * m.spd * frameScale;
+```
+
+This keeps the breathing motion stable across machines.
+
+---
+
+### 6) Freeze mode for inspection (Space)
+Freeze stops the simulation time, so parameters stop evolving:
+
+```js
+const dtSim = isFrozen ? 0 : dt;
+simNow += dtSim;
+```
+
+When frozen:
+- the lattice stays exactly the same
+- auto camera orbit stops
+But manual camera control still works, so I can inspect the form.
+
+---
+
+### 7) Camera behaviour (auto orbit + snap back)
+Auto orbit moves the camera slowly around the centre:
+
+```js
+autoTheta += AUTO_SPEED * dtSim;
+applyCamera(camTheta, camPhi, radius);
+```
+
+Manual control uses mouse drag to change `camTheta` and `camPhi`. On release, the camera snaps back smoothly using easing:
+
+```js
+const t = easeOutCubic(snapT);
+camTheta = lerpAngle(snapFromTheta, autoTheta, t);
+camPhi   = lerp(snapFromPhi, autoPhi, t);
+```
+
+This keeps the sketch autonomous, but still lets the viewer explore.
+
+---
 
 ## Reflection
 This process started as a random drawing tool and ended as a rule based system that feels alive.
 
 The biggest improvement was not adding complexity, but adding clarity:
-- Stable composition
-- Stable randomness per cube
-- Controlled evolution with timing rules
+- Stable composition (framed lattice)
+- Stable randomness per cube (no flicker)
+- Controlled evolution with timing rules (always two motions)
 
 In the final version, the structure always stays readable, while the small imperfections and slow motion keep it interesting over time.
 
