@@ -33,6 +33,7 @@ A simple rule I followed:
 - Let small details change over time
 
 ## Influences and references
+My main inspiration came from artists who treat systems as collaborators. I tried to keep their idea of strict rules + controlled deviation, but translate it into my own cube lattice.
 
 ### Vera Molnar: Interruptions
 <div style="display:flex; justify-content:center; flex-wrap:wrap; text-align:center; margin:10px 0;">
@@ -44,6 +45,8 @@ A simple rule I followed:
 
 Molnar’s idea of constructive disorder was an important reference during my weekly work. She starts with a strict geometric system and then disturbs it with controlled changes. That approach matches my process: the grid stays stable, but small deviations create expression.
 
+Link: https://dam.org/museum/artists_ui/artists/molnar-vera/interruptions/
+
 ### Georg Nees: Schotter (1968)
 <div style="display:flex; justify-content:center; flex-wrap:wrap; text-align:center; margin:10px 0;">
   <img src="content/final/ref_nees_schotter.webp" width="70%" alt="Georg Nees Schotter reference image">
@@ -53,6 +56,8 @@ Molnar’s idea of constructive disorder was an important reference during my we
 </p>
 
 Nees shows how a grid can slowly break down while still staying readable as a grid. Even when things get messy, you can see the system. That idea influenced my decision to always keep the structure visible and only push disorder locally.
+
+Link: https://spalterdigital.com/artworks/shotter-gravel-stones/
 
 ### Manfred Mohr: early hypercube explorations
 <div style="display:flex; justify-content:center; flex-wrap:wrap; text-align:center; margin:10px 0;">
@@ -64,8 +69,14 @@ Nees shows how a grid can slowly break down while still staying readable as a gr
 
 Mohr helped me think about cubes as a graphic element instead of a realistic 3D object. His early hypercube works focus on structure and line systems. That pushed me to keep my cubes as wireframes and treat the sketch as drawing, not rendering.
 
+Link: https://www.emohr.com/from_my_archives.html
+
 ### Anders Hoff (Inconvergent)
-His work helped me understand controlled noise. It showed me that randomness can look clean and elegant when it is limited and applied with intention.
+Hoff’s work helped me understand controlled noise. He shows that randomness can still look clean when it is constrained and “biased” by rules. For me, the key takeaway was to use noise locally (jittered vertices) while keeping the global structure stable (the lattice).
+
+Links:
+- https://inconvergent.net/
+- https://github.com/inconvergent
 
 ## Iteration process (weekly projects)
 
@@ -74,7 +85,7 @@ His work helped me understand controlled noise. It showed me that randomness can
 
 In this iteration I realised I needed a rule based structure, so I introduced a grid. Each cell draws a distorted rectangle. That gave the randomness something to push against.
 
-I built controls for:
+I could control parameters like:
 - Grid Size
 - Gap
 - Irregularity
@@ -101,7 +112,7 @@ Key changes:
 - The system never stops moving
 - Parameters evolve smoothly instead of jumping
 
-I had to refine the logic so it always stays active. I fixed a bug where sometimes only one parameter moved by forcing the system to always keep two active motions running.
+I had to refine the logic to make sure it never stopped. I fixed a bug where sometimes only one parameter moved by forcing the system to always top up the active motions.
 
 Main learning:
 - Constraints and timing are more important than adding more randomness
@@ -119,6 +130,8 @@ I also added a camera system:
 - Manual rotation and zoom
 - Freeze mode to inspect a still state
 
+Short note on testing: I tried different lattice sizes (N = 4, 6, 8). N = 6 felt like the best balance. It stays readable, but it is still dense enough to feel like a “volume”. I also tested irregularity ranges. If it gets too high, the cubes stop reading as cubes.
+
 ## Algorithmic thinking (how it works)
 
 ### Code structure (quick map)
@@ -126,6 +139,17 @@ The sketch is basically split into three parts:
 1. **Simulation**: update the evolving parameters (size, irr, stroke weight)
 2. **Camera**: auto orbit + manual control + smooth snap back
 3. **Drawing**: build the cube lattice and draw jittered wireframe cubes
+
+### Full frame pseudocode
+```text
+each frame:
+  if not frozen:
+    update motions and UI values
+    update auto camera
+  apply camera
+  set stroke + seed
+  draw lattice (N×N×N)
+```
 
 ---
 
@@ -196,9 +220,9 @@ So the cube stays readable, but it looks slightly drawn and imperfect.
 ---
 
 ### 3) Stable randomness (no flicker)
-At first I had flickering, because random jitter would change every frame. I did not want that. I wanted each cube to keep its own stable shape.
+At first I had flickering, because random jitter would change every frame. It looked noisy, but not intentional. The moment I fixed the flicker, the whole sketch started to feel designed.
 
-So I control the randomness using `randomSeed()`.
+I control the randomness using `randomSeed()`.
 
 Global seed (same every frame):
 ```js
